@@ -1,0 +1,55 @@
+#include "pch.h"
+#include "iostream"
+#include "tchar.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "windows.h"
+using namespace std;
+int x;
+void func(int m);
+int main()
+{
+	setlocale(LC_CTYPE, "rus");
+	int b, o,x1,x2,y1,y2,x=0,o1;
+	do {
+		cout << "\nЧтобы сыграть в игру кубик нажмите 1 ";
+		cout << "\nДля выхода из игры нажмите 2 ";
+		do {
+			cout << "\nВведите свой выбор ="; cin >> o;
+		} while (o < 1 || o>2);
+
+		switch (o)
+		{
+		case 1:
+			for (int i = 1; i <= 3; i++)
+			{
+			x1 = (int)((((float)rand()/(float)RAND_MAX)*6)+1);
+			cout << "\n" << x1;
+			x2 = (int)((((float)rand() / (float)RAND_MAX) * 6) + 1);
+			cout << "\n" << x2;
+			cout << "\nОбщее значение " <<i<<"броска=  "<<x1+x2 ;
+			x = x + (x1 + x2);
+			cout << "\nдля совершения броска нажмите цифру 1    "; cin >> o1;
+			y1 = (int)((((float)rand() / (float)RAND_MAX) * 6) + 1);
+			y2 = (int)((((float)rand() / (float)RAND_MAX) * 6) + 1);
+			cout << "\n значение первого кубика равно=   " << y1; Sleep(20);
+			cout << "\n значение Vtorogo кубика равно=   " << y2; Sleep(20);
+			cout << "\n За первый ход=   " << y1 + y2;
+			cout << "\n Внимание ход компьютера   ";
+		    }
+			break;
+		case 2:
+			cout << "\nУдачи дорогой........!";
+			break;
+		
+		
+		}
+	} while (o!=2);
+	system("pause");
+}
+
+void func(int m)
+{
+
+	
+}
