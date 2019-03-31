@@ -1,0 +1,55 @@
+*/Задание 2:
+Используя указатель на массив целых чисел, изменить порядок следования элементов массива
+на противоположный.
+Использовать в программе арифметику указателей для продвижения по массиву, а также
+оператор разыменования.
+/*
+#include "pch.h"
+#include "iostream"
+#include "ctime"
+#include "stdlib.h"
+#include "stdlib.h"
+#include "stdio.h"
+#include "cstdio"
+#include "cstring"
+using namespace std;
+int sum(int &a,int &b);
+const size_t N = 10;
+typedef int T[N];
+
+int main()
+{
+	T A; T B;
+	int *a, *b;
+	//create an array
+	for (int i = 0; i < N; i++)
+	{
+		A[i] = (int)(((float)rand() / (float)RAND_MAX) * 100);
+		cout << "\n" << A[i];
+	}
+	a = A; b = B; int  k = 0;
+	cout << "\n new array output"<<endl;
+	for (int i = N-1; i >=0; i--)
+	{
+		*(b+k) = a[i]; k++;
+		
+	
+	}
+	
+	for (int i = 0; i<N ; i++)
+	{
+	
+		cout << B[i]<<endl;
+
+	}
+
+	//p=sum(*a, *c);
+	
+	return 0;
+}
+int sum(int &a, int &b)
+{
+	int c;
+	c = a + b;
+	return c;
+}
