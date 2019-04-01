@@ -1,0 +1,49 @@
+Тема: Указатели. Передача параметров
+Задания для самостоятельной работы:
+Задание №1:
+Написать функцию, которая получает указатель на массив и его размер, и возвращает сумму и произведение его элементов в двух параметрах-указателях.
+#include "pch.h"
+#include "iostream"
+#include "ctime"
+#include "stdlib.h"
+#include "stdlib.h"
+#include "stdio.h"
+#include "cstdio"
+#include "cstring"
+using namespace std;
+const size_t N = 3;
+typedef int T[N];
+void myfunc(T A, int n, int *sum, int *mult);
+int summ = 0;
+int main()
+{
+	T A;
+	int* start = 0;
+	int* end = 0;
+	
+	//create an array
+	for (int i = 0; i < N; i++)
+	{
+		A[i] = (int)((((float)rand() / (float)RAND_MAX) * 10)+1);
+		cout << "\n" << A[i];
+	}
+	start = A; end = &A[N - 1];
+	 myfunc(A,  N, start, end);
+	
+	return 0;
+}
+	void myfunc(T A, int n, int *sum, int *mult)
+	{
+		int multi = 1;
+		int p = 1;
+		while (sum <= mult)
+		{
+		
+			summ = summ + *sum;
+			p = *sum;
+			multi = multi * (*sum);
+			sum++;
+		}
+		cout << "\nsumm= " << summ;
+		cout << "\nmulti= " << multi;
+	}
