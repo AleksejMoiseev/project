@@ -260,3 +260,113 @@ if (a > b) { return myfunc(b, a%b); }
 if (b>a) { return myfunc(a, b%a); }
 
 }
+
+
+
+Задание 3:
+Написать игру «Быки и коровы». Программа "загадывает" четырёхзначное число и играющий
+должен угадать его. После ввода пользователем числа программа сообщает, сколько цифр числа
+угадано (быки) и сколько цифр угадано и стоит на нужном месте (коровы). После отгадывания
+числа на экран необходимо вывести количество сделанных пользователем попыток. В
+программе необходимо использовать рекурсию.
+
+
+#include "pch.h"
+#include "iostream"
+#include "ctime"
+#include "stdlib.h"
+#include "stdlib.h"
+#include "stdio.h"
+#include "cstdio"
+#include "cstring"
+#include "iomanip"
+using namespace std;
+const size_t N = 4;
+const size_t M = 4;
+void kvadrat(int Brr[60], int B1[60], int C1[60], int n, int b, int c);
+
+int BULL(int Arr[N], int Brr[N], int n, int bull);
+int COW(int Arr[N], int Brr[N], int n, int cow);
+int main()
+{
+	srand(time(NULL));
+	int A[N], B[60], BULL1[60], COW1[60], C[N]; int bull, cow = 0, number = 0, str = 0;
+	do {
+		str = 0;
+		for (int i = 0; i < N; i++)
+		{
+			A[i] = rand() % 9;
+			//cout << A[i];
+		}
+		for (int i = 0; i < N - 1; i++)
+		{
+			for (int j = 0; j < N; j++)
+			{
+				if (i != j) {
+					if (A[i] == A[j]) { str = 1; }
+				}
+			}
+		}
+
+	} while (str);
+
+	cout << setw(10) << " GAME BULLS and COWs";
+	cout << "\nEnter a four-digit number" << endl;
+	do {
+		cout << endl;
+		cin >> B[number];
+		C[0] = B[number] / 1e3;
+		C[1] = (B[number] - C[0] * 1e3) / 1e2;
+		C[2] = (B[number] - C[0] * 1e3 - C[1] * 1e2) / 10;
+		C[3] = B[number] - C[0] * 1e3 - C[1] * 1e2 - C[2] * 10;
+		system("cls");
+		bull = 0, cow = 0;
+		bull = BULL(A, C, N, bull);
+		cow = COW(A, C, N, cow);
+		BULL1[number] = bull;
+		COW1[number] = cow;
+		number++;
+		kvadrat(B, BULL1, COW1, number, bull, cow);
+	} while (bull != 4);
+	system("cls");
+	for (int i = 0; i < 10; i++)
+		cout << "\nYOUR WINE!!!!";
+	return 0;
+}
+int BULL(int Arr[N], int Brr[N], int n, int bull)
+{
+	for (int k = 0; k < n; k++)
+		if (Brr[k] == Arr[k]) { bull++; }
+	return bull;
+}
+int COW(int Arr[N], int Brr[N], int n, int cow)
+{
+
+	for (int k = 0; k < n; k++)
+	{
+		for (int j = 0; j < n; j++)
+			if ((j != k) && (Brr[k] == Arr[j])) { cow++; }
+	}
+	return cow;
+}
+void kvadrat(int Brr[60], int B1[60], int C1[60], int n, int b, int c)
+{
+	const size_t M = 40;
+	const size_t N = 10;
+	char upLeftCorner = 218, upRightCorner = 191, horizontalLine = 196, vertivalLine = 179, downLeftCorner = 192, downRightCorner = 217;
+	cout << upLeftCorner << setw(M) << setfill(horizontalLine) << upRightCorner << endl;
+	cout << setfill(' ');
+	cout << vertivalLine << "\t" << setw(5) << "Number" << "\t" << setw(5) << "guess" << "\t" << setw(5) << "Result" << setw(M - 14 - 15) << vertivalLine << endl;
+	for (int j = 0; j < n; j++)
+		cout << vertivalLine << "\t" << setw(5) << j << "\t" << setw(5) << Brr[j] << "\t" << setw(2) << B1[j] << "B" << C1[j] << "C" << setw(M - 13 - 15) << vertivalLine << endl;
+
+	for (int i = 1; i < N - 5 + n; i++)
+	{
+		cout << vertivalLine << setw(M) << vertivalLine << endl;
+
+	}
+	cout << setfill(horizontalLine);
+	cout << downLeftCorner << setw(M - 1) << horizontalLine << downRightCorner;
+}
+
+
