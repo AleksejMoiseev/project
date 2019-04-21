@@ -4,3 +4,259 @@
  Вывод матрицы на экран;
  Определение максимального и минимального элемента на главной диагонали матрицы;
  Сортировка элементов по возрастанию отдельно для каждой строки матрицы.
+#include "pch.h"
+#include "iostream"
+#include "ctime"
+#include "stdlib.h"
+#include "stdlib.h"
+#include "stdio.h"
+#include "cstdio"
+#include "cstring"
+#include "iomanip"
+using namespace std;
+const size_t N = 4;
+const size_t M = 4;
+
+void myfunc(double A[N][M], int b,int c);
+void myfunc(int A[N][M], int b, int c);
+void myfunc(char A[N][M], int b,int c);
+void print(int A[N][M], int b, int c);
+void print(double A[N][M], int b, int c);
+void print(char A[N][M], int b, int c);
+void sort(int A[N][M], int b, int c);
+void sort(double A[N][M], int b, int c);
+void sort(char A[N][M], int b, int c);
+
+int main()
+{
+int B[N][M]; double A[N][M]; char C[N][M];
+cout << endl;
+
+myfunc(A,N,M);
+
+return 0;
+}
+
+void myfunc(double A[N][M], int b, int c)
+{
+double a=0;
+for (int i = 0; i < b; i++)
+{
+for (int j = 0; j < c; j++)
+{
+
+		A[i][j] = (double)(((double)rand() / RAND_MAX) * 10);
+		cout << setw(20) << A[i][j];
+
+	}
+	cout << endl;
+	a = a + A[i][i];
+}
+cout << "DIAGONAL RAVNA=   " << a;
+ sort( A,  b, c);
+ print(A, b, c);
+}
+void myfunc(int A[N][M], int b, int c)
+{
+int a=0;
+for (int i = 0; i < b; i++)
+{
+for (int j = 0; j < c; j++)
+{
+
+		A[i][j] = (int)((double)(((double)rand() / RAND_MAX) * 10));
+		cout << setw(5) << A[i][j];
+
+	}
+	cout << endl;
+	a = a + A[i][i];
+}
+cout << "DIAGONAL RAVNA=   " << a;
+int t, j = 0;
+for (int i = 0; i < b; i++)
+{
+	
+	for (int k = 0; k < c; k++)
+	{
+		
+		for (j = 0; j < c -k-1; j++)
+		{
+			//cout << "\n" << A[i][j + 1] <<"\t"<<"max=  "<<max<< "\t" << A[i][j] << "\t" << "i=" << i << "J=" << j;
+			if (A[i][j] > A[i][j+1])
+			{	t = A[i][j + 1];
+			A[i][j + 1] = A[i][j];
+			A[i][j] = t;
+			}
+			
+			
+		}
+	}
+}
+print(A, b, c);
+}
+void myfunc(char A[N][M], int b, int c)
+{
+
+for (int i = 0; i < b; i++)
+{
+	for (int j = 0; j < c; j++)
+	{
+
+		A[i][j] = 'N' + rand();
+		cout << setw(20) << A[i][j];
+
+	}
+	cout << endl;
+}
+sort(A, b, c);
+print(A, b, c);
+}
+void print(int A[N][M], int b, int c)
+{
+cout << endl;
+for (int i = 0; i < b; i++)
+{
+for (int j = 0; j < c; j++)
+{
+
+		cout << setw(5) << A[i][j];
+
+	}
+	cout << endl;
+	
+}
+}
+void print(double A[N][M], int b, int c)
+{
+cout << endl;
+for (int i = 0; i < b; i++)
+{
+for (int j = 0; j < c; j++)
+{
+
+		cout << setw(20) << A[i][j];
+
+	}
+	cout << endl;
+
+}
+}
+void print(char A[N][M], int b, int c)
+{
+cout << endl;
+for (int i = 0; i < b; i++)
+{
+for (int j = 0; j < c; j++)
+{
+
+		cout << setw(5) << A[i][j];
+
+	}
+	cout << endl;
+
+}
+}
+void sort(int A[N][M], int b, int c)
+{
+int t,j = 0;
+for (int i = 0; i < b; i++)
+{
+
+	for (int k = 0; k < c; k++)
+	{
+
+		for (j = 0; j < c - k - 1; j++)
+		{
+			//cout << "\n" << A[i][j + 1] << "\t" << "max=  " << max << "\t" << A[i][j] << "\t" << "i=" << i << "J=" << j;
+			if (A[i][j] > A[i][j + 1])
+			{
+				t = A[i][j + 1];
+				A[i][j + 1] = A[i][j];
+				A[i][j] = t;
+			}
+
+
+		}
+	}
+}
+}
+void sort(double A[N][M], int b, int c)
+{
+
+double t;int j = 0;
+for (int i = 0; i < b; i++)
+{
+
+	for (int k = 0; k < c; k++)
+	{
+
+		for (j = 0; j < c - k - 1; j++)
+		{
+			//cout << "\n" << A[i][j + 1] << "\t" << "max=  " << max << "\t" << A[i][j] << "\t" << "i=" << i << "J=" << j;
+			if (A[i][j] > A[i][j + 1])
+			{
+				t = A[i][j + 1];
+				A[i][j + 1] = A[i][j];
+				A[i][j] = t;
+			}
+
+
+		}
+	}
+}
+}
+void sort(char A[N][M], int b, int c)
+{
+
+char t; int j = 0;
+for (int i = 0; i < b; i++)
+{
+
+	for (int k = 0; k < c; k++)
+	{
+
+		for (j = 0; j < c - k - 1; j++)
+		{
+			//cout << "\n" << A[i][j + 1] << "\t" << "max=  " << max << "\t" << A[i][j] << "\t" << "i=" << i << "J=" << j;
+			if (A[i][j] > A[i][j + 1])
+			{
+				t = A[i][j + 1];
+				A[i][j + 1] = A[i][j];
+				A[i][j] = t;
+			}
+
+
+		}
+	}
+}
+}
+
+
+Задание 2:
+Написать рекурсивную функцию нахождения наибольшего общего делителя двух целых чисел.
+#include "pch.h"
+#include "iostream"
+#include "ctime"
+#include "stdlib.h"
+#include "stdlib.h"
+#include "stdio.h"
+#include "cstdio"
+#include "cstring"
+using namespace std;
+int myfunc(int a, int b);
+int main()
+{
+int a, b;
+cout << "Vvedite a and b";
+cin >> a >> b;
+cout << "Vashe znachenie ravno= " << myfunc(a, b);
+return 0;
+}
+
+int myfunc(int a, int b)
+{
+if (b == 0) { return a; }
+if (a > b) { return myfunc(b, a%b); }
+if (b>a) { return myfunc(a, b%a); }
+
+}
