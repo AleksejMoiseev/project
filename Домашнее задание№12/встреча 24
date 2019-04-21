@@ -1,1 +1,290 @@
 
+Тема: Функции. Перегрузка функций. Рекурсия.
+Домашнее задание
+Задание 1:
+Дана шахматная доска размером 8х8 и шахматный конь. Программа должна запросить у
+пользователя координаты клетки поля и поставить туда коня. Задача программы найти и
+вывести путь коня, при котором он обойдет все клетки доски, становясь в каждую клетку
+только один раз. (Так как процесс отыскания пути для разных начальных клеток может
+затянуться, то рекомендуется сначала опробовать задачу на поле размером 6х6). В программе
+необходимо использовать рекурсию.
+
+
+Задание 2:
+Написать игру "Пятнашки".
+
+#include "pch.h"
+#include "iostream"
+#include "tchar.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "iomanip"
+#include "time.h"
+using namespace std;
+void printdesk(int arr[], int n,int& i0);
+
+int main()
+{
+srand(time(NULL));
+const size_t N = 16;
+long int r = 0;
+int play[N] = {};
+int i = 0, i1, i2, i0=0, temp;
+for (i = 0; i < N; i++)
+{
+play[i] = i;
+}
+
+for (i = 0; i < 50; i++)
+{
+
+	i1 = rand() % 15;
+	i2 = rand() % 15;
+	if (i1 != i2)
+	{
+		int temp = play[i1];
+		play[i1] = play[i2];
+		play[i2] = temp;
+	}
+}
+printdesk(play, N,i0);
+cout << endl;
+char key;
+while(true)
+{
+	cin >> key;
+	switch (key)
+	{
+	case's':
+		if (i0 > 3)
+		{
+			temp = play[i0];
+
+			play[i0] = play[i0 - 4];
+
+			play[i0 - 4] = temp;
+			i0 = i0 - 4;
+		}
+		break;
+	case'w':
+		if (i0 < 12)
+		{
+			temp = play[i0];
+
+			play[i0] = play[i0 + 4];
+
+			play[i0 + 4] = temp;
+			i0 = i0 - 4;
+		}
+		break;
+	case'd':
+		if (i0 != 0 || i0 != 4 || i0 != 8 || i0 != 12)
+		{
+			temp = play[i0];
+
+			play[i0] = play[i0 - 1];
+
+			play[i0 - 1] = temp;
+			i0 = i0 - 1;
+		}
+		break;
+	case'a':
+		if (i0 != 3 || i0 != 7 || i0 != 11 || i0 != 15)
+		{
+			temp = play[i0];
+
+			play[i0] = play[i0 + 1];
+
+			play[i0 + 1] = temp;
+			i0 = i0 + 1;
+		}
+		break;
+	}
+	system("cls");
+	printdesk(play, N, i0);
+	for (int k = 0, i = 0; i < N; i++)
+	{
+		if (i == play[i]) { k++; }
+		if(k==15){ break; }
+	}
+}
+cout << "YOAR WINE";
+
+return 0;
+}
+void printdesk(int arr[], int n,int& i0)
+{
+int j = 0;
+for (int i = 0; i < n; i++)
+{
+if (arr[i] == 0) {
+cout << " ";
+i0 = i;
+}
+else {
+cout << arr[i];
+}
+cout << "\t";
+if (j == 3)
+{
+cout << endl;
+j = 0;
+}
+else { j++; }
+}
+}
+
+
+Задание 3:
+Написать игру "Крестики-нолики".
+
+#include "pch.h"
+#include "iostream"
+#include "tchar.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "windows.h"
+#include "iomanip"
+using namespace std;
+const size_t N = 4;
+typedef char T[N][N];
+
+void kvadrat(T A,int n,int m);
+void comp(T A, int x2, int y2);
+void man(T A,int x1, int y1);
+int proverka(T A, int a, int b);
+int main()
+{
+int x1=0, y1=0, x2=0, y2=0,res=0;
+T arr = { 0 };
+kvadrat(arr, N, N);
+while (1)
+{
+
+	man(arr, x1, y1);
+	kvadrat(arr, N, N);
+	res=proverka(arr, N, N);
+	//cout <<"res="<< res;
+	if (res == 1||res==2) {cout<<"VICTORIZ MAN"; break; }
+
+	comp(arr, x2, y2);
+	kvadrat(arr, N, N);
+	res = proverka(arr, N, N);
+	//cout << "res=" << res;
+	if (res == 04) { cout << "SUPER NICHY"; break; }
+	if (res == 1 || res == 2) { cout << "VICTORIZ COMPUTER"; break; }
+
+}
+
+return 0;
+}
+void kvadrat(T A, int n, int m)
+{
+const size_t M = 30;
+const size_t K = 15;
+char upLeftCorner = 218, upRightCorner = 191, horizontalLine = 196, vertivalLine = 179, downLeftCorner = 192, downRightCorner = 217;
+cout << setw(6) << "1" << setw(10) << "2" << setw(11) << "3" << endl;
+cout << " " << upLeftCorner << setw(M) << setfill(horizontalLine) << upRightCorner << endl;
+cout << setfill(' ');
+
+cout << " " << vertivalLine << setw(10) << vertivalLine << setw(10) << vertivalLine << setw(10) << vertivalLine << endl;
+cout << "1" << vertivalLine << setw(4)<<A[1][1]<< setw(6) << vertivalLine << setw(5) << A[1][2] << setw(5)<< vertivalLine << setw(5) << A[1][3] << setw(5) << vertivalLine << endl;
+cout << " " << vertivalLine << setw(10) << vertivalLine << setw(10) << vertivalLine << setw(10) << vertivalLine << endl;
+
+cout << " " << upLeftCorner << setw(M) << setfill(horizontalLine) << upRightCorner << endl;
+cout << setfill(' ');
+
+cout << " " << vertivalLine << setw(10) << vertivalLine << setw(10) << vertivalLine << setw(10) << vertivalLine << endl;
+cout << "2" << vertivalLine << setw(4) << A[2][1] << setw(6) << vertivalLine << setw(5) << A[2][2] << setw(5) << vertivalLine << setw(5) << A[2][3] << setw(5) << vertivalLine << endl;
+cout << " " << vertivalLine << setw(10) << vertivalLine << setw(10) << vertivalLine << setw(10) << vertivalLine << endl;
+
+
+
+
+cout << " " << upLeftCorner << setw(M) << setfill(horizontalLine) << upRightCorner << endl;
+cout << setfill(' ');
+
+cout << " " << vertivalLine << setw(10) << vertivalLine << setw(10) << vertivalLine << setw(10) << vertivalLine << endl;
+cout << "3" << vertivalLine << setw(4) << A[3][1] << setw(6) << vertivalLine << setw(5) << A[3][2] << setw(5) << vertivalLine << setw(5) << A[3][3] << setw(5) << vertivalLine << endl;
+cout << " " << vertivalLine << setw(10) << vertivalLine << setw(10) << vertivalLine << setw(10) << vertivalLine << endl;
+cout << setfill(horizontalLine);
+cout << " " << downLeftCorner << setw(M - 1) << horizontalLine << downRightCorner;
+cout << endl;
+}
+void comp(T A, int x2, int y2)
+{
+
+do
+{
+	
+	//cout << "\nVvedite GAME  2" << endl;
+    //cin >> x2 >> y2;
+	x2 = (int)((((float)rand() / (float)RAND_MAX) * 2) + 1);
+	y2 = (int)((((float)rand() / (float)RAND_MAX) * 2) + 1);
+
+} while (A[x2][y2] == 'X' || A[x2][y2] == 'O');
+A[x2][y2] = 'O';
+system("cls");
+}
+void man(T A, int x1, int y1)
+{
+do
+{
+cout << "\nVvedite GAME 1" << endl;
+cin >> x1 >> y1;
+
+} while (A[x1][y1] == 'X' || A[x1][y1] == 'O');
+A[x1][y1] = 'X';
+system("cls");
+}
+int proverka(T A, int a, int b)
+{
+int i, j,man1=0, comp1=0,d2=0,d1=0,d12=0,d22=0,res=0,k=1;
+int man2 = 0; int comp2 = 0;
+//проверка строк
+for (i = 1; i < a; i++)
+{
+man1 = 0; comp1 = 0;
+for (j = 1; j < b; j++)
+{
+if (A[i][j] == 'X') { man1++; }
+if (A[i][j] == 'O') { comp1++; }
+if (A[i][j] == 'X'|| A[i][j] == 'O'){res++;}
+if (man1 == 3 ) { return 1; }
+if (comp1 == 3) { return 2; }
+}
+}
+//проверка столбоцов
+for (j = 1; j < b; j++)
+{
+
+	man2 = 0; comp2 = 0;
+	for (i = 1; i < a; i++)
+	{
+		if (A[i][j] == 'X') { man2++; 	}
+		if (A[i][j] == 'O') { comp2++; }
+		if (man2 == 3) { return 1; }
+		if (comp2 == 3) { return 2; }
+	}
+	
+}
+//Проверка главной диагонали
+for (i = 1; i < a; i++)
+{
+	if (A[i][i] == 'X') { d1++; }
+	if (A[i][i] == 'O') { d2++; }
+}
+	for (j = b - 1; j > 0; j--)
+	{
+		if (A[j][k] == 'X') { d12++;  }
+		if (A[j][k] == 'O') { d22++; }
+		if (d12 == 3) { return 1; }
+		if (d22 == 3) { return 2; }
+		k++;
+	}
+
+
+
+return 0;
+if (res == 9) { return 3; }
+}
