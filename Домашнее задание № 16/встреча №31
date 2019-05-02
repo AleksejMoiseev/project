@@ -1,0 +1,166 @@
+#include "pch.h"
+#include "iostream"
+#include "tchar.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "windows.h"
+#include "math.h"
+using namespace std;
+const size_t N = 10;
+typedef char T[N];
+
+int mystrcmp(const char * str1, const char * str2)//функция сравнивает две строки, и, если строки равны возвращает 0, если первая строка больше второй, то возвращает 1, иначе - 1.
+
+{
+	int k1 = 0; int k2 = 0;
+	while (str1[k1])
+	{
+		k1++;
+		
+	}
+	while (str2[k2])
+	{
+		k2++;
+
+	}
+	if (k1 == k2) { return 0; }
+	if (k1 > k2) { return 1; }
+	else
+	{
+		return -1;
+	}
+	
+}
+int StringToNumber(char * str)//функция strlen
+{
+	int k1 = 0;
+	while (str[k1])
+	{
+		k1++;
+
+	}
+	return k1;
+}
+int StringToNumber1(char * str)//функция конвертирует строку в число и возвращает это число
+{
+	char A[10]; int k = 0; int d = 0; int res = 0;
+	for (char i = '0'; i <= '9'; i++)
+	{
+		A[k] = i; cout << A[k];
+		k++;
+		
+	}
+	d = StringToNumber(str);
+	for(int i=d,k=0;i>=0;i--)
+		for(int j=0;j<10;j++)
+			if (str[i] == A[j]) { res = res + j * pow(10, k); k++; }
+
+	return res;
+}
+int *func(int n,int*a)//фукция разбивает число на одленные цифры и возвращает количество разрядов в нулевой элемент массива
+{
+	
+	for (int i = 1; n > 0; i++)
+	{
+		a[i] = n % 10;
+		n = n / 10;
+		a[0] = i;
+	}
+
+	return a;
+}
+char * NumberToString(int number)//функция конвертирует число в строку и   на эту строку  возвращает указатель на эту строку
+{
+	int ASD[10] = {}; int *b = ASD; 
+	b = func(number, b);
+	/*for (int i = 0; i <= b[0]; i++)
+		cout << "\nb[i]\t" << b[i];*/
+
+
+	char A[10]; int k = 0; int d = 0;
+	for (char i = '0'; i <= '9'; i++)
+	{
+		A[k] = i; 
+		k++;
+	}
+	
+	char *c = new char[b[0]];
+	for (int i = b[0]; i >= 1; i--)
+		for (int j = 0; j < 10; j++)
+			if (b[i] == j) { c[d] = A[j]; d++; }
+	c[d] = '\0';
+	//cout << "\nitogo " << c;
+	
+	return c;
+}
+
+char * Uppercase(char * str1)//функция преобразует строку в верхний регистр.
+{
+	int i = 0;
+	while (str1[i])
+	{
+		str1[i] = toupper(str1[i]);
+
+		i++;
+	}
+
+	return str1;
+}
+char * Lowercase(char * str1)//функция преобразует строку в нижний регистр.
+
+{
+	int i = 0; 
+	while (str1[i])
+	{
+		str1[i] = tolower(str1[i]);
+
+		i++;
+	}
+
+	return str1;
+}
+
+char  *mystrrev(char * str)//функция реверсирует строку и возвращает указатель на новую строку
+{
+	int d = StringToNumber(str);
+	char *c = 0;
+	c = new char[d+1];
+	int k = 0;
+	for (int i = d-1; i >= 0; i--)
+	{
+		c[k] = str[i]; //cout << "\n" << c[k];
+		k++;
+	}
+	c[d] = '\0';
+	
+	
+	return c;
+}
+int main()
+{
+	int k = 0;
+	T A; T B = {}; char*a = 0; int*b = 0; int chois = 48;
+	int etalon[10] = { 48,49,50,51,52,53,54,55,56,57 };
+	cout << "\n Enter ...A..";
+	gets_s(A);
+	//cout << "\n Enter ...B..";
+	//gets_s(B);
+	a = A;
+	cout << "\n" << a;
+	char*c = B;
+	c= mystrrev(a);
+	cout << "\n" << c;
+	
+	/*B[0] = '0';
+	if (B[0] == chois)
+	{
+	
+		cout << "\n WINE" << 4,8 % 10;
+     }
+	 */
+	
+	/*cin >> chois;
+	char *c=NumberToString(chois);
+	cout << "\nitogo" << c;*///для преобразования числа в строки
+	return 0;
+}
