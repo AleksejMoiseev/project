@@ -1,0 +1,164 @@
+#include "pch.h"
+#include "iostream"
+#include "tchar.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "windows.h"
+#include "iomanip"
+using namespace std;
+const size_t N = 2;
+const size_t M = 2;
+typedef int T[N][M];
+//функция создания массива
+int **array_1(int r, int c)//функция создания массива
+{
+	int **ptr;
+	ptr = new int*[r];
+	for (int i = 0; i < r; i++)
+		ptr[i] = new int[c];
+	return ptr;
+}
+//функция печати двумерного динамического массива
+void mat(int *ptr[], int r, int c)//функция печати двумерного динамического массива
+{
+	for (int i = 0; i < r; i++)
+	{
+
+		for (int j = 0; j < c; j++)
+			cout << setw(5) << ptr[i][j];
+		cout << endl;
+	}
+}
+//функция удаления двумерного массива
+void delet_arr(int *ptr[], int r)
+{
+	for (int i = 0; i < r; i++)
+		delete[] ptr[i];
+	delete[]ptr;
+
+}
+//функция добавления столбца
+void myfunc(int *ptr[], int r, int c, int stolb)//функция добавления столбца
+{
+	int**ptr1; int c1;
+	c1 = c + 1;
+	ptr1 = array_1(r, c1);
+
+	for (int i = 0; i < r; i++)
+		for (int j = 0; j < stolb; j++)
+		{
+
+			ptr1[i][j] = ptr[i][j];
+
+
+		}
+
+	for (int i = 0; i < r; i++)
+		for (int j = stolb + 1; j < c1; j++)
+		{
+			ptr1[i][j] = ptr[i][j - 1];
+
+		}
+	cout << "\nenter elemant massive";
+	for (int i = 0; i < r; i++)
+	{
+		cout << "\n" << i << "elemant";
+		cin >> ptr1[i][stolb];
+
+	}
+	cout << "\nyoar new massive" << endl;
+	mat(ptr1, r, c1);
+
+	delet_arr(ptr1, r);
+}
+//функция удаления  столбца
+void myfunc_delet(int *ptr[], int r, int c, int stolb)
+{
+
+	int**ptr1; int c1;
+	c1 = c - 1;
+	ptr1 = array_1(r, c1);
+
+
+	for (int i = 0; i < r; i++)
+		for (int j = 0; j < stolb; j++)
+		{
+
+			ptr1[i][j] = ptr[i][j];
+
+
+		}
+	for (int i = 0; i < r; i++)
+		for (int j = stolb; j < c1; j++)
+		{
+			ptr1[i][j] = ptr[i][j + 1];
+
+		}
+
+	mat(ptr1, r, c1);
+
+	delet_arr(ptr1, r);
+}
+//функция осуществляющая сдвиг вправо на к позиций
+void func(int *ptr[], int n, int m, int k)
+{
+
+	int**ptr1;
+	// Создание нового двумерного динамического массива
+	///////////////////////////////////////////////////
+	ptr1 = new int*[n];
+	for (int i = 0; i < m; i++)
+		ptr1[i] = new int[m];
+	//////////////////////////////////////////////////
+
+	for (int i = 0; i < n; i++)
+	{
+
+		for (int j = 0; j < m; j++)
+		{
+			if (k > n - 1) { k = 0; }
+			ptr1[i][k] = ptr[i][j];
+			k++;
+		}
+	}
+	mat(ptr1, n, m);// печать нового массива со сдвигом
+	delet_arr(ptr1, n);//удаление временного массива из оперативной памяти 
+}
+void main()
+
+{
+	int **arr; int rovs = 0; int covs = 0; int s = 0;
+	cout << "\n enter rovs";
+	cin >> rovs;
+	cout << "\n enter covs";
+	cin >> covs;
+
+	arr = array_1(rovs, covs);//создали двумерный миассив
+	//заполни случайными числами
+	for (int i = 0; i < rovs; i++)
+	{
+
+		for (int j = 0; j < covs; j++)
+			arr[i][j] = rand() % 10;
+	}
+
+	//печать двумерного массива
+	mat(arr, rovs, covs);
+
+	cout << "\n\n\n";
+	// ввод столбца который нуно добавить/удалить
+	cout << "\nvvedite stolb";
+	cin >> s;
+	//удаление столбца
+	//myfunc_delet(c);
+	func(arr, rovs, covs, s);
+	
+	////////////////////////////удаление массива созданного через оператор нью
+	for (int i = 0; i < rovs; i++)
+	{
+		delete[]arr[i];
+
+	}
+
+	delete[]arr;
+}
