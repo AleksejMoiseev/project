@@ -1,0 +1,276 @@
+Задание 1:
+Транспонирование матрицы – это операция, после которой столбцы прежней матрицы
+становятся строками, а строки столбцами. Напишите функцию транспонирования матрицы.
+
+
+
+
+
+#include "pch.h"
+#include "iostream"
+#include "tchar.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "windows.h"
+#include "iomanip"
+using namespace std;
+const size_t N = 3;
+const size_t M = 3;
+typedef int T[N][M];
+//функция создания массива
+int **array_1(int r, int c)//функция создания массива
+{
+int *ptr;
+ptr = new int[r];
+for (int i = 0; i < r; i++)
+ptr[i] = new int[c];
+return ptr;
+}
+//функция печати двумерного динамического массива
+void mat(int *ptr[], int r, int c)//функция печати двумерного динамического массива
+{
+for (int i = 0; i < r; i++)
+{
+
+	for (int j = 0; j < c; j++)
+		cout << setw(5) << ptr[i][j];
+	cout << endl;
+}
+}
+//функция удаления двумерного массива
+void delet_arr(int *ptr[], int r)
+{
+for (int i = 0; i < r; i++)
+delete[] ptr[i];
+delete[]ptr;
+
+}
+//функция добавления столбца
+void myfunc(int *ptr[], int r, int c, int stolb)//функция добавления столбца
+{
+int**ptr1; int c1;
+c1 = c + 1;
+ptr1 = array_1(r, c1);
+
+for (int i = 0; i < r; i++)
+	for (int j = 0; j < stolb; j++)
+	{
+
+		ptr1[i][j] = ptr[i][j];
+
+
+	}
+
+for (int i = 0; i < r; i++)
+	for (int j = stolb + 1; j < c1; j++)
+	{
+		ptr1[i][j] = ptr[i][j - 1];
+
+	}
+cout << "\nenter elemant massive";
+for (int i = 0; i < r; i++)
+{
+	cout << "\n" << i << "elemant";
+	cin >> ptr1[i][stolb];
+
+}
+cout << "\nyoar new massive" << endl;
+mat(ptr1, r, c1);
+
+delet_arr(ptr1, r);
+}
+//функция удаления столбца
+void myfunc_delet(int *ptr[], int r, int c, int stolb)
+{
+
+int**ptr1; int c1;
+c1 = c - 1;
+ptr1 = array_1(r, c1);
+
+
+for (int i = 0; i < r; i++)
+	for (int j = 0; j < stolb; j++)
+	{
+
+		ptr1[i][j] = ptr[i][j];
+
+
+	}
+for (int i = 0; i < r; i++)
+	for (int j = stolb; j < c1; j++)
+	{
+		ptr1[i][j] = ptr[i][j + 1];
+
+	}
+
+mat(ptr1, r, c1);
+
+delet_arr(ptr1, r);
+}
+//функция осуществляющая сдвиг вправо на к позиций
+void func(int *ptr[], int n, int m, int k)
+{
+
+int**ptr1;
+// Создание нового двумерного динамического массива
+///////////////////////////////////////////////////
+ptr1 = new int*[n];
+for (int i = 0; i < n; i++)
+	ptr1[i] = new int[m];
+//////////////////////////////////////////////////
+
+for (int i = 0; i < n; i++)
+{
+
+	for (int j = 0; j < m; j++)
+	{
+		if (k > n - 1) { k = 0; }
+		ptr1[i][k] = ptr[i][j];
+		k++;
+	}
+}
+mat(ptr1, n, m);// печать нового массива со сдвигом
+delet_arr(ptr1, n);//удаление временного массива из оперативной памяти 
+}
+//функция транспонирования матрицы
+void trans(int *ptr[], int n, int m)
+{
+int n1 = m; //строки
+int m1 = n;//столбцы
+int *ptr1;
+ptr1 = new int[n1];
+for (int i = 0; i < n1; i++)
+ptr1[i] = new int[m1];
+for (int i = 0; i < n1; i++)
+for (int j = 0; j < m1; j++)
+ptr1[i][j] = ptr[j][i];
+
+cout << "\n\n\n";
+mat(ptr1, n1,m1);
+delet_arr(ptr1, n1);
+}
+void main()
+
+{
+//Создание, инициализация двумерного массива
+//////////////////////////////////////////////
+int **arr; int n=0, m=0;//n-стороки, m-столбцы
+n = N; m = M;
+arr = new int *[n];
+
+for (int i = 0; i < n; i++)
+	arr[i] = new int[m];
+
+for (int i = 0; i < n; i++)
+	for (int j = 0; j < m; j++)
+		arr[i][j] = rand() % 10;
+
+
+for (int i = 0; i < n; i++)
+{
+	cout << endl;
+	for (int j = 0; j < m; j++)
+		cout <<setw(5) <<arr[i][j];
+}
+
+///////////////////////////////////////////////
+trans(arr, n, m);
+
+
+//удаление двумерного массива
+//////////////////
+delet_arr(arr, n);
+}////////////////////
+
+
+Задание 2:
+Создайте динамический массив, хранящий в первой строке имя, а во второй - телефон.
+Организуйте поиск по имени и по номеру телефона и возможность ввода и изменения данных.
+
+
+
+#include "pch.h"
+#include "iostream"
+#include "tchar.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "windows.h"
+#include "math.h"
+#include "iomanip"
+using namespace std;
+const size_t N = 3;
+struct directory{
+
+char name[100];
+char telefon[100];
+};
+directory L[N];
+// поиск абонента по телефону или имени
+int serch()//поиск абонента по телефону или имени
+
+{
+char name[100];
+cout << " \n\n\nenter name jr telefon to serch\t" << endl;
+cin >> name;
+cout << " \nname jr telefon to serch\t" << name;
+int i;
+for (i = 0; i < N; i++)
+{
+if (!(strcmp(name, L[i].name))) { break; }
+if (!(strcmp(name, L[i].telefon))) { break; }
+}
+if (i == N) { cout << "\n there is no such subscriber in the directory"; return -1; }
+cout << "\n name\t" << L[i].name;
+
+cout << "\n enter telefon\t" << L[i].telefon;
+return i;
+}
+int main()
+
+{
+char y; int num = 0;
+//////////////////////////////////////
+for (int i = 0; i < N; i++)
+
+{
+	cout << "\n enter name\t";
+	cin >> L[i].name;
+	cout << "\n enter telefon\t";
+	cin >> L[i].telefon;
+}
+
+for (int i = 0; i < N; i++)
+
+{
+	cout << "\n  name\t" << L[i].name;
+
+	cout << "\n enter telefon\t" << L[i].telefon;
+}
+//////////////////////////////////////////////////
+num=serch();
+
+while (num >= 0)
+{
+	cout << "\n\nwant to change subscriber data.if yes press 'y'? if not any key\t";
+	cin >> y;
+	if (y == 'y' || y == 'Y')
+	{
+		cout << "\n enter name\t";
+		cin >> L[num].name;
+		cout << "\n enter telefon\t";
+		cin >> L[num].telefon;
+	}
+	else
+	{
+		break;
+	}
+	for (int i = 0; i < N; i++)
+
+	{
+		cout << "\n  name\t" << L[i].name;
+
+		cout << "\n enter telefon\t" << L[i].telefon;
+	}
+}
+return 0;
+}
