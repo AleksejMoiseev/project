@@ -1,3 +1,104 @@
+Задание 1:
+Создайте структуру, описывающую комплексное число. Реализуйте арифметические операции
+с комплексными числами: сумму, разность, умножение, деление.
+
+
+#include "pch.h"
+#include "iostream"
+#include "tchar.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "windows.h"
+#include "math.h"
+#include "iomanip"
+using namespace std;
+const size_t N = 3;
+struct comlex
+{
+	float Am;
+	float Im;
+};
+
+comlex ch1;
+comlex ch2;
+comlex res;
+
+void pozitiv()
+{
+	res.Am = ch1.Am + ch2.Am;
+	res.Im = ch1.Im + ch2.Im;
+
+	cout << "\nYour complex number is\t" << res.Am  <<"+"<< res.Im<< "i";
+}
+
+void negativ()
+{
+	res.Am = ch1.Am - ch2.Am;
+	res.Im = ch1.Im - ch2.Im;
+
+	cout << "\nYour complex number is\t" << res.Am << "+" << res.Im << "i";
+}
+void num()
+{
+	res.Am = ch1.Am*ch2.Am - ch1.Im*ch2.Im;
+	res.Im = ch1.Am *ch2.Im+ ch1.Im* ch2.Am;
+
+	cout << "\nYour complex number is\t" << res.Am << "+" << res.Im << "i";
+}
+
+void del()
+{
+	res.Am = (ch1.Am*ch2.Am + ch1.Im* ch2.Im) / (ch2.Am*ch2.Am + ch2.Im*ch2.Im);
+	res.Im = (ch2.Am* ch1.Im- ch1.Am* ch2.Im)/ (ch2.Am*ch2.Am + ch2.Im*ch2.Im);
+
+	cout << "\nYour complex number is\t" << res.Am << "+" << res.Im << "i";
+}
+
+int main()
+{
+	int choise = 0;
+	cout << "\Enter the real and imaginary part of the first\t";
+	cin >> ch1.Am >> ch1.Im;
+
+	cout << "\Enter the real and imaginary part of the second\t";
+	cin >> ch2.Am >> ch2.Im;
+
+	cout << "\nenter the required operation\t";
+	cout << "\n 1. addition";
+	cout << "\n 2.subtraction";
+	cout << "\n 3. division";
+	cout << "\n 4. multiplication"<<endl;
+	cin >> choise;
+
+	switch (choise)
+	{
+
+	case 1:
+		pozitiv();
+		break;
+	case 2:
+		negativ();
+		break;
+	case 3:
+		del();
+		break;
+	case 4:
+		num();
+		break;
+	default:
+		cout << "\n ERROR";
+		break;
+	}
+
+
+	return 0;
+}
+
+
+
+
+
+
 Задание 2:
 Реализовать структуру «Автомобиль» (длина, клиренс (высота посадки), объем двигателя,
 мощность двигателя, диаметр колес, цвет, тип коробки передач). Создайте функции для задания
