@@ -228,3 +228,129 @@ int main()
 
 return 0;
 }
+
+
+
+Задание 2: 
+Разработать структуру «Живая сущность» (скорость передвижения, тип (птица, скот, человек), цвет, характеристика (для птицы – скорость полета, вещественное число, для скота – парнокопытное, логическая переменная, для человека – уровень IQ, целая переменная).  
+Рекомендации: характеристику реализовать как объединение, тип реализовать как перечислимый тип данных. 
+Создать экземпляр структуры «Живая сущность» и реализовать для него следующие функции: 
+ Ввод информации 
+ Печать информации 
+
+
+#include "iostream"
+#include "tchar.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "windows.h"
+#include "math.h"
+#include "iomanip"
+using namespace std;
+const size_t N = 3;
+typedef char T[N];
+
+enum Tip {bird, cattle, person};
+union characteristic
+{
+	float v;
+	bool c;
+	int d;
+};
+
+struct Living_essence
+{
+	float V;
+	Tip tip;
+	char color[20];
+	characteristic L[N];
+
+};
+
+int main()
+{
+	Living_essence LE1[N];
+
+	LE1[0].tip = bird;
+	LE1[1].tip = cattle;
+	LE1[2].tip = person;
+	for (int i = 0; i < N; i++)
+	{
+		switch (LE1[i].tip)
+		{
+		case bird:
+			cout << "essence bird";
+			cout << "\n travel speed\t";
+			cin >> LE1[i].V;
+			cout << "\n enter color\t";
+			cin>>LE1[i].color;
+			cout << "\n enter characteristic\t";
+			cin >> LE1[i].L[i].v;
+			break;
+		case cattle:
+			cout << "cattle essence";
+			cout << "\ travel speed\t";
+			cin >> LE1[i].V;
+			cout << "\n enter color\t";
+			cin >> LE1[i].color;
+			cout << "\n enter characteristic if hoofed enter 1 otherwise 0\t";
+			cin >> LE1[i].L[i].c;
+
+			break;
+		case person:
+			cout << "essence person";
+			cout << "\n travel speed\t";
+			cin >> LE1[i].V;
+			cout << "\n enter color\t";
+			cin >> LE1[i].color;
+			cout << "\n enter IQ level\t";
+			cin >> LE1[i].L[i].d;
+
+			break;
+		default:
+			break;
+		}
+
+
+
+	}
+
+
+	for (int i = 0; i < N; i++)
+	{
+		switch (LE1[i].tip)
+		{
+		case bird:
+			cout << "essence bird";
+			cout << "\nV  speed\t"<< LE1[i].V;
+			cout << "\nV  color\t"<<LE1[i].color;
+			cout << "\nV  characteristic\t"<< LE1[i].L[i].v;
+			break;
+		case cattle:
+			cout << "\ncattle essence";
+			cout << "\nV  speed\t"<< LE1[i].V;
+			cout << "\nV color\t"<< LE1[i].color;
+			if (LE1[i].L[i].c == 1) { cout << "\nanimal hoofed"; }
+			else
+			{
+				cout << "\nanimal NOT hoofed";
+			}
+
+			break;
+		case person:
+			cout << "\nessence person";
+			cout << "\nV  speed\t"<< LE1[i].V;
+			cout << "\nV  color\t"<<LE1[i].color;
+			cout << "\nV  IQ level\t"<< LE1[i].L[i].d;
+
+			break;
+		default:
+			break;
+		}
+
+
+
+	}
+	
+return 0;
+}
