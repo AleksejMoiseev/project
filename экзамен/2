@@ -1,0 +1,86 @@
+#include "pch.h"
+#include "iostream"
+#include "tchar.h"
+#include "stdio.h"
+#include "stdlib.h"
+using namespace std;
+
+int StringToNumber(char * str)//функция strlen
+{
+	int k1 = 0;
+	while (str[k1])
+	{
+		k1++;
+
+	}
+	return k1;
+}
+
+int myfunc(int a, int s)
+{
+	int an, an1, k = 0, res = 0, k1 = 0;
+	int A[10];
+	if (a < 0) { a = a * -1; }
+	an = a; an1 = a;
+	for (int i = 0; an > 0; i++)
+	{
+		an1 = an % 10; k = i + 1;
+		an = an / 10;
+		A[i] = an1;
+
+	}
+	cout << "\nколичество разрядов в числе\t " << k;
+	res = 0;
+	for (int i = 0, j = s; i < s; i++, j--)
+	{
+		cout << "\nA[k]" << A[k - 1];
+		res = res + A[k - 1] * pow(10, j);
+		k--;
+	}
+
+	return res / 10;
+
+}
+
+int StringToNumber1(char * str)//функция конвертирует строку в число и возвращает это число
+{
+	char A[10]; int k = 0; int d = 0; int res = 0;
+	for (char i = '0'; i <= '9'; i++)
+	{
+		A[k] = i; cout << A[k];
+		k++;
+
+	}
+	d = StringToNumber(str);
+	for (int i = d, k = 0; i >= 0; i--)
+		for (int j = 0; j < 10; j++)
+			if (str[i] == A[j]) { res = res + j * pow(10, k); k++; }
+
+	return res;
+}
+int main()
+{
+	setlocale(LC_CTYPE, "rus");
+	int a = 0; int K = 0; int b; char *buf; int j = 0;
+	char A[1024];
+	cout << "vvedite chislo= "; cin >> A;
+	cout << "Введите колво нужных первых цифр= "; cin >> K;
+
+	while (A[j])
+	{
+		if (!(A[j] > '0'&&A[j] < '9')) { cout << "\n JOPA\t"; return 0; }
+
+		j++;
+	}
+	
+	buf = new char[K];
+
+	for (int i = 0; i < K; i++)
+		buf[i] = A[i];
+
+	b=StringToNumber1(buf);
+	cout << "\nВаше число\t" << b;
+
+		delete []buf;
+	return 0;
+}
