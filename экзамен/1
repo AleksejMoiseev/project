@@ -1,0 +1,39 @@
+#include "pch.h"
+#include "iostream"
+#include "tchar.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "windows.h"
+#include "iomanip"
+
+using namespace std;
+const size_t N = 10;
+typedef int T[N];
+void myfunc(T A, int n);
+int main()
+{
+
+int n = N;
+
+int A[N] = {};
+for (int i = 0; i < N; i++)
+{
+	A[i] = (int)(((float)rand() / (float)RAND_MAX) * 100); 
+	cout<<"\n" <<setw(10)<< A[i];
+}
+cout << "\n\n\n\n";
+
+myfunc(A, n);
+
+return 0;
+}
+void myfunc(T A, int n)
+{
+int b = 0;
+for (int i = 0; i < N; i++)
+{
+b = b + A[i];
+}
+
+	cout << b / N;
+}
