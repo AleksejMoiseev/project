@@ -1,0 +1,88 @@
+Тема: Введение в объектно-ориентированное программирование. 
+Задание. Реализуйте класс Дробь. Необходимо хранить числитель и знаменатель в качестве переменных-членов. 
+Реализуйте функции-члены для ввода данных в переменные-члены, для выполнения арифметических операций
+(сложение, вычитание, умножение, деление, и т.д.).
+
+#include "iostream"
+#include "fstream"
+#include "string"
+using namespace std;
+
+class drob
+{
+public:
+	float chislitel;
+	float znamenat;
+};
+
+int main()
+{
+	drob chislo;
+	drob chislo1;
+	drob res;
+	char menu;
+	float a;
+
+	cout << "Enter the value of the numerator and the spacer";
+	cin >> chislo.chislitel >> chislo.znamenat;
+	cout << "Enter the value of the numerator and the spacer fo second value";
+	cin >> chislo1.chislitel >> chislo1.znamenat;
+	do {
+		cout << "menu:";
+		cout << " \na- addition ";
+		cout << "\nb- subtraction ";
+		cout << " \nc- multiplication";
+		cout << "\nd- division ";
+		cout << "\nchoose what needs to be done with the fraction and enter the desired letter";
+		cin >> menu;
+	} while (!(strchr("abcd",tolower(menu))));
+
+	switch (menu)
+	{
+	case 'a':
+		a = (chislo1.znamenat * chislo.chislitel + chislo.znamenat * chislo1.chislitel) / (chislo.znamenat * chislo1.znamenat);
+		cout << "\n Your value is...." <<endl;
+		res.chislitel = (chislo1.znamenat * chislo.chislitel + chislo.znamenat * chislo1.chislitel);
+		res.znamenat = (chislo.znamenat * chislo1.znamenat);
+		cout << res.chislitel << endl;
+		cout << "---" << endl;
+		cout << res.znamenat << endl;
+
+		break;
+	case 'b':
+
+		a = (chislo1.znamenat * chislo.chislitel - chislo.znamenat * chislo1.chislitel) / (chislo.znamenat * chislo1.znamenat);
+		cout << "\n Your value is...." << a << endl;
+		res.chislitel = (chislo1.znamenat * chislo.chislitel - chislo.znamenat * chislo1.chislitel);
+		res.znamenat = (chislo.znamenat * chislo1.znamenat);
+		cout << res.chislitel << endl;
+		cout << "---" << endl;
+		cout << res.znamenat << endl;
+		break;
+	case' c':
+		a = a = (chislo.chislitel * chislo1.chislitel) / (chislo.znamenat * chislo.znamenat);
+		cout << "\n Your value is...." << a << endl;
+		res.chislitel = (chislo.chislitel * chislo1.chislitel);
+		res.znamenat = (chislo.znamenat * chislo.znamenat);
+		cout << res.chislitel << endl;
+		cout << "---" << endl;
+		cout << res.znamenat << endl;
+		break;
+	case 'd':
+
+		a = (chislo1.znamenat * chislo.chislitel) /( chislo.znamenat * chislo1.chislitel);
+		cout << "\n Your value is...." << a << endl;
+		res.chislitel = (chislo1.znamenat * chislo.chislitel);
+			res.znamenat = chislo.znamenat * chislo1.chislitel;
+			cout << res.chislitel << endl;
+		cout << "---" << endl;
+		cout << res.znamenat << endl;
+		break;
+
+	}
+
+
+
+		return 0;
+
+}
